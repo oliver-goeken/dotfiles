@@ -107,7 +107,6 @@ if empty(glob(data_dir . '/autoload/plug.vim'))
 	autocmd VimEnter * silent! PlugInstall --sync | silent! source $MYVIMRC
 	autocmd VimEnter * silent! ! python3 ~/.vim/plugged/YouCompleteMe/install.py --all
 	autocmd VimEnter * silent! YcmRestartServer
-	autocmd VimEnter * silent! source $MYVIMRC
 endif
 
 call plug#begin()
