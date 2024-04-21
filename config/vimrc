@@ -150,8 +150,12 @@ endfunction
 
 set laststatus=2
 
-set statusline=%#StatusLineTermNC#
-set statusline+=%{Current_git_branch()}
+
+if &rtp =~ 'vim-fugitive'
+	set statusline=%#StatusLineTermNC#
+	set statusline+=%{Current_git_branch()}
+endif
+
 set statusline+=%#Visual#
 set statusline+=\ %f
 set statusline+=\ %m
