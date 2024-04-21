@@ -13,12 +13,13 @@ do
 	then
 		if [ -L ~/.$filename ]
 		then
-			# symlink check found at ------> https://superuser.com/a/196655
-			if ! [ "$(stat -L -c %d:%i ~/.$filename)" = "$(stat -L -c %d:%i DOTFILEDIR/config/$filename)" ]
+			if ! [ "$(readlink -f ~/.$filename)" = "$(readlink -f $DOTFILEDIR/config/$filename)" ]
 			then
 				echo "incorrect $filename symlink found, updating..."
 				unlink ~/.$filename
 				create_symlink $filename
+			else
+				echo "$filename symlink already exists!"
 			fi
 		else
 			echo "non-linked $filename found, creating backup at..."
