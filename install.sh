@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 
+touch ~/.vimrc
 VIMRCDIFF=$(diff ~/.vimrc configure/vimrc)
 if [ "$VIMRCDIFF" != "" ]
 then
