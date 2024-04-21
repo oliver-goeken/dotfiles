@@ -13,7 +13,7 @@ do
 	then
 		if [ -L ~/.$filename ]
 		then
-			if ! [ "~/.$filename" -ef "$DOTFILEDIR/config/$filename" ]
+			if ! [ "$(stat -L -c %d:%i ~/.$filename)" = "$(stat -L -c %d:%i DOTFILEDIR/config/$filename)" ]
 			then
 				echo "incorrect $filename symlink found, updating..."
 				unlink ~/.$filename
