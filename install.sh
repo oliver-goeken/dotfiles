@@ -42,5 +42,6 @@ done
 
 if [ -e ~/.vim/autoload/plug.vim ]
 then
+	echo "testing"
 	vi
 fi
