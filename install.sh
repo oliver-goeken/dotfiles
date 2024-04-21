@@ -1,3 +1,8 @@
 #!/usr/bin/env bash
 
-sudo ln -s configure/vimrc ~/.vimrc
+VIMRCDIFF=$(diff ~/.vimrc configure/vimrc)
+if [ "$VIMRCDIFF" != "" ]
+then
+	echo "~/.vimrc not found, installing... "
+	sudo ln -s configure/vimrc ~/.vimrc
+fi
