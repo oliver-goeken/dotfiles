@@ -27,7 +27,7 @@ do
 	else
 		if [ -L ~/.$filename ]
 		then 
-			echo "broekn $filename found, updating..."
+			echo "broken $filename found, updating..."
 			unlink ~/.$filename
 			create_symlink $filename
 		else
