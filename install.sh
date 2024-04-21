@@ -40,7 +40,7 @@ do
 	fi
 done
 
-if [ -e ~/.vim/autoload/plug.vim ]
+if ! [ -e ~/.vim/autoload/plug.vim ]
 then
 	echo "testing"
 	vi
