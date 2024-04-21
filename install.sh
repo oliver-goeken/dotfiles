@@ -1,12 +1,13 @@
 #!/usr/bin/env bash
 
 DOTFILEDIR=~/dotfiles
+DOTFILES=vimrc
 
 create_symlink () {
 	sudo ln -s $DOTFILEDIR/config/$1 ~/.$1
 }
 
-for filename in vimrc
+for filename in $DOTFILES
 do
 	if [ -e ~/.$filename  ]
 	then
