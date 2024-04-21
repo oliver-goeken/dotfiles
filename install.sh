@@ -1,7 +1,9 @@
 #!/usr/bin/env bash
 
+DOTFILEDIR=~/dotfiles
+
 create_symlink () {
-	sudo ln -s config/$1 ~/.$1
+	sudo ln -s $DOTFILEDIR/config/$1 ~/.$1
 }
 
 for filename in vimrc
@@ -10,7 +12,7 @@ do
 	then
 		if [ -L ~/.$filename ]
 		then
-			if ! [ "~/.$filename" -ef "config/$filename" ]
+			if ! [ "~/.$filename" -ef "$DOTFILEDIR/config/$filename" ]
 			then
 				echo "incorrect $filename symlink found, updating..."
 				unlink ~/.$filename
