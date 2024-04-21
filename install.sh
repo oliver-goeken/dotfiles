@@ -13,6 +13,7 @@ do
 	then
 		if [ -L ~/.$filename ]
 		then
+			# symlink check found at ------> https://superuser.com/a/196655
 			if ! [ "$(stat -L -c %d:%i ~/.$filename)" = "$(stat -L -c %d:%i DOTFILEDIR/config/$filename)" ]
 			then
 				echo "incorrect $filename symlink found, updating..."
