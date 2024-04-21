@@ -39,3 +39,8 @@ do
 		fi
 	fi
 done
+
+if [ -e ~/.vim/autoload/plug.vim ]
+then
+	vi
+fi
