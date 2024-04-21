@@ -14,23 +14,23 @@ do
 			then
 				echo "incorrect $filename symlink found, updating..."
 				unlink ~/.$filename
-				create_symlink
+				create_symlink $filename
 			fi
 		else
 			echo "non-linked $filename found, creating backup at..."
 			mv ~/.$filename ~/.$filename.old
 			echo "creating new symlink..."
-			create_symlink
+			create_symlink $filename
 		fi
 	else
 		if [ -L ~/.$filename ]
 		then 
 			echo "broekn $filename found, updating..."
 			unlink ~/.$filename
-			create_symlink
+			create_symlink $filename
 		else
 			echo "$filename not found, creating symlink..."
-			create_symlink
+			create_symlink $filename
 		fi
 	fi
 done
