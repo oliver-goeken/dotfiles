@@ -23,7 +23,14 @@ do
 			create_symlink
 		fi
 	else
-		echo "$filename not found, creating symlink..."
-		create_symlink
+		if [ -L ~/.$filename ]
+		then 
+			echo "broekn $filename found, updating..."
+			unlink ~/.$filename
+			create_symlink
+		else
+			echo "$filename not found, creating symlink..."
+			create_symlink
+		fi
 	fi
 done
