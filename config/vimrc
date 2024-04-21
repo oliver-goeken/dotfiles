@@ -151,7 +151,7 @@ endfunction
 set laststatus=2
 
 
-if &rtp =~ 'vim-fugitive'
+if !empty(glob("~/.vim/plugged/vim-fugitive/plugin/fugitive.vim"))
 	set statusline=%#StatusLineTermNC#
 	set statusline+=%{Current_git_branch()}
 endif
