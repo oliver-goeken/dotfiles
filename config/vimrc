@@ -105,13 +105,13 @@ let data_dir = '~/.vim'
 if empty(glob(data_dir . '/autoload/plug.vim'))
 	silent execute '!curl -fLo '.data_dir.'/autoload/plug.vim --create-dirs  https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
 	autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+	! python3 ~/.vim/plugged/YouCompleteMe/install.py --all
 endif
 
 call plug#begin()
 Plug 'scrooloose/nerdtree'
 Plug 'romainl/vim-cool'
 Plug 'ycm-core/YouCompleteMe'
-call system('python3 ~/.vim/plugged/YouCompleteMe/install.py --all')
 Plug 'tpope/vim-fugitive'
 Plug 'simeji/winresizer'
 Plug 'drzel/vim-scrolloff-fraction'
