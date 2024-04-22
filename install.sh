@@ -74,7 +74,7 @@ do
 				print_if_verbose "$filename symlink already exists!"
 			fi
 		else
-			print_not_silent "unlinked linked $filename found, creating backup at \"~/.$filename.old\"..."
+			print_not_silent "unlinked $filename found, creating backup at \"~/.$filename.old\"..."
 			mv ~/.$filename ~/.$filename.old
 			print_not_silent "creating new symlink..."
 			create_symlink $filename
