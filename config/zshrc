@@ -44,9 +44,10 @@ alias l='ls -CF'
 
 
 # Plugins
-DOTFILEDIR=$(dirname "$(readlink -f "${0:a}")")
-for file in $DOTFILEDIR/../plugins/zsh/*(.); do
+DOTFILEDIR=~/dotfiles
+
+for file in $DOTFILEDIR/plugins/zsh/*(.); do
 	source "$file"
 done
 
-source $DOTFILEDIR/../plugins/zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source $DOTFILEDIR/plugins/zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
