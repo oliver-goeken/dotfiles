@@ -44,7 +44,7 @@ alias l='ls -CF'
 
 
 # Plugins
-DOTFILEDIR=${0:A:h}
+DOTFILEDIR=$(dirname "$(readlink -f "${0:a}")")
 for file in $DOTFILEDIR/../plugins/zsh/*(.); do
 	source "$file"
 done
