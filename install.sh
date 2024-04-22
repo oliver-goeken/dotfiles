@@ -1,28 +1,42 @@
 #!/usr/bin/env bash
 
+# option handling from --> https://stackoverflow.com/a/14203146
 VERBOSE=0
 SILENT=0
-if [ $# -eq 1 ]
-then
-	if [ $1 = '--help' ] || [ $1 = '-h' ]
-	then
-		echo "usage: install.sh [--verbose]"
-		exit 0
-	fi
+usage_message () {
+	echo "usage: install.sh [options]"
+	echo "  options:"
+	echo "    -h, --help     Display this help message"
+	echo "    -v, --verbose  Print all messages"
+	echo "    -s, --silent   Suppresse all messages"
+}
+while [[ $# -gt 0 ]]; do
+	case $1 in
+		-h|--help)
+			usage_message
+			exit 0
+			;;
+		-v|--verbose)
+			VERBOSE=1
+			shift
+			;;
+		-s|--silent)
+			SILENT=1
+			shift
+			;;
+		-*|--*)
+			echo "unknown option $1"
+			usage_message
+			exit 1
+			;;
+		*)
+			echo "invalid argument $1"
+			usage_message
+			exit 1
+			;;
+	esac
+done
 
-	if [ $1 = '--verbose' ] || [ $1 = '-v' ]
-	then
-		VERBOSE=1
-	fi
-
-	if [ $1 = '--silent' ] || [ $1 = '-s' ]
-	then
-		SILENT=1
-	fi
-fi
-
-# finding script directory regardless of running location, courtesy of @tekumara comment under --> https://stackoverflow.com/a/246128
-DOTFILEDIR=$(dirname "$(readlink -f "${BASH_SOURCE[0]}")")
 
 create_symlink () {
 	sudo ln -s $DOTFILEDIR/config/$1 ~/.$1
@@ -42,6 +56,9 @@ print_if_verbose () {
 	fi
 }
 
+
+# finding script directory regardless of running location, courtesy of @tekumara comment under --> https://stackoverflow.com/a/246128
+DOTFILEDIR=$(dirname "$(readlink -f "${BASH_SOURCE[0]}")")
 for filename in `ls $DOTFILEDIR/config`
 do
 	if [ -e ~/.$filename  ]
@@ -85,6 +102,12 @@ then
 	print_if_verbose $(echo /tmp/dotfile_clone)
 fi
 
+if ! [ -e ~/.vim/autoload/plug.vim ]
+then
+	print_not_silent "configuring vim..."
+	vi
+fi
+
 if ! [[ "$OSTYPE" == "darwin"* ]]; then
 	ZSH_START_FILE=/etc/zsh/zshenv
 	if ! grep -F -x -q 'eval "$(dircolors ~/.dir_colors)"' $ZSH_START_FILE > /dev/null
@@ -95,10 +118,5 @@ if ! [[ "$OSTYPE" == "darwin"* ]]; then
 	fi
 fi
 
-if ! [ -e ~/.vim/autoload/plug.vim ]
-then
-	print_not_silent "configuring vim..."
-	vi
-fi
 
 print_not_silent "done!"
