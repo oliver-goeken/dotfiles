@@ -20,13 +20,11 @@ export CLICOLOR=1
 # OS-based stuff
 case `uname` in 
     Darwin)
-        eval $(thefuck --alias)
         alias python3=/opt/homebrew/bin/python3
         alias python=/opt/homebrew/bin/python3
         export PATH=$(brew --prefix)/bin:$(brew --prefix)/sbin:$PATH
     ;;
     Linux)
-		eval $(thefuck --alias fuck)
 		alias bat="batcat"
     ;;
 esac
