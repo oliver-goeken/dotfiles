@@ -1,0 +1,9 @@
+blankerprg btop
+idle 600 blanker
+
+altscreen on
+
+hardstatus alwayslastline
+hardstatus string '%{= kw}%?  %-w%?%{+b yk}  %n*%t  %{-}%+w%=%{y}[%{-}%m/%d %C%A%{y}]' 
+
+mousetrack off

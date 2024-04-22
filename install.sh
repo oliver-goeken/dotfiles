@@ -1,13 +1,12 @@
 #!/usr/bin/env bash
 
 DOTFILEDIR=~/dotfiles
-DOTFILES=vimrc
 
 create_symlink () {
 	sudo ln -s $DOTFILEDIR/config/$1 ~/.$1
 }
 
-for filename in $DOTFILES
+for filename in `ls $DOTFILEDIR/config`
 do
 	if [ -e ~/.$filename  ]
 	then
@@ -22,7 +21,7 @@ do
 				echo "$filename symlink already exists!"
 			fi
 		else
-			echo "non-linked $filename found, creating backup at..."
+			echo "non-linked $filename found, creating backup at \"~/.$filename.old\"..."
 			mv ~/.$filename ~/.$filename.old
 			echo "creating new symlink..."
 			create_symlink $filename
