@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
-DOTFILEDIR=~/dotfiles
+# finding script directory regardless of running location, courtesy of @tekumara comment under --> https://stackoverflow.com/a/246128
+DOTFILEDIR=$(dirname "$(readlink -f "${BASH_SOURCE[0]}")")
 
 create_symlink () {
 	sudo ln -s $DOTFILEDIR/config/$1 ~/.$1
