@@ -42,8 +42,15 @@ alias ll='ls -AlF'
 alias la='ls -A'
 alias l='ls -CF'
 
+alias cls='clear;ls'
+
+function cdl {
+	cd $1
+	ls --color=auto
+}
 
 # Plugins
+autoload -U colors && colors
 DOTFILEDIR=~/dotfiles
 
 for file in $DOTFILEDIR/plugins/zsh/*(.); do

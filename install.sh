@@ -80,6 +80,8 @@ if ! [[ "$OSTYPE" == "darwin"* ]]; then
 		dircolors --print-database > ~/.dir_colors
 		echo 'eval "$(dircolors ~/.dir_colors)"' | sudo tee -a $ZSH_START_FILE > /dev/null
 	fi
+
+	sudo apt install fortunes
 fi
 
 
