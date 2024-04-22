@@ -73,6 +73,9 @@ then
 fi
 
 ZSH_START_FILE=/etc/zsh/zshenv
+if [[ $"OSTYPE" == "darwin"* ]]; then
+	ZSH_START_FILE=/etc/zshenv
+fi
 
 if ! grep -F -x -q 'eval "$(dircolors ~/.dir_colors)"' $ZSH_START_FILE > /dev/null
 then
