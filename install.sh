@@ -1,10 +1,32 @@
 #!/usr/bin/env bash
 
+if [ $# -eq 1 ]
+then
+	if [ $1 = '--help' ] || [ $1 = '-h' ]
+	then
+		echo "usage: install.sh [--verbose]"
+		exit 0
+	fi
+
+	VERBOSE=0
+	if [ $1 = '--verbose' ] || [ $1 = '-v' ]
+	then
+		VERBOSE=1
+	fi
+fi
+
 # finding script directory regardless of running location, courtesy of @tekumara comment under --> https://stackoverflow.com/a/246128
 DOTFILEDIR=$(dirname "$(readlink -f "${BASH_SOURCE[0]}")")
 
 create_symlink () {
 	sudo ln -s $DOTFILEDIR/config/$1 ~/.$1
+}
+
+print_if_verbose () {
+	if [ $VERBOSE = 1 ]
+	then
+		echo "$1"
+	fi
 }
 
 for filename in `ls $DOTFILEDIR/config`
@@ -39,6 +61,23 @@ do
 		fi
 	fi
 done
+
+
+if ! [ -d $DOTFILEDIR/plugins/zsh/zsh-syntax-highlighting ]
+then
+	echo "cloning zsh-syntax-highlighting..."
+	cd $DOTFILEDIR/plugins/zsh
+	git clone https://github.com/zsh-users/zsh-syntax-highlighting.git >> /tmp/dotfile_clone
+	echo /tmp/dotfile_clone >> ~/.dotfiles.log
+	print_if_verbose $(echo /tmp/dotfile_clone)
+fi
+
+if ! grep -Fxq "eval \"$(dircolors ~/.dir_colors)\"" /etc/zshrc
+then
+	dircolors --print-database > ~/.dir_colors
+	echo "eval \"$(dircolors ~/.dir_colors)\"" | sudo tee -a /etc/zshrc > /dev/null
+fi
+
 
 if ! [ -e ~/.vim/autoload/plug.vim ]
 then

@@ -1,0 +1,41 @@
+# Custom Prompt
+autoload -Uz vcs_info
+precmd() { vcs_info }
+zstyle ':vcs_info:git:*' formats '[%b] '
+setopt PROMPT_SUBST
+PROMPT='%F{cyan}[%D{%I:%M%p}]%f %F{magenta}%n%f %F{red}${vcs_info_msg_0_}%f%F{blue}%~%f %F{blue}%(!.#.$)%f '
+
+# History
+HISTFILE=~/.zsh_history
+HISTSIZE=10000
+SAVEHIST=10000
+setopt appendhistory
+
+# Colors
+export CLICOLOR=1
+
+# OS-based stuff
+case `uname` in 
+    Darwin)
+        eval $(thefuck --alias)
+        alias python3=/opt/homebrew/bin/python3
+        alias python=/opt/homebrew/bin/python3
+        export PATH=$(brew --prefix)/bin:$(brew --prefix)/sbin:$PATH
+    ;;
+    Linux)
+		eval $(thefuck --alias fuck)
+		alias bat="batcat"
+    ;;
+esac
+
+# Aliases
+alias rm="rm -i"
+alias gdb='gdb -silent'
+
+# Plugins
+DOTFILEDIR=${0:A:h}/..
+for file in $DOTFILEDIR/plugins/zsh/*(.); do
+	source "$file"
+done
+
+source $DOTFILEDIR/plugins/zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
