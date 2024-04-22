@@ -6,4 +6,7 @@ altscreen on
 hardstatus alwayslastline
 hardstatus string '%{= kw}%?  %-w%?%{+b yk}  %n*%t  %{-}%+w%=%{y}[%{-}%m/%d %C%A%{y}]' 
 
+bindkey -k k1 mousetrack on
+bindkey -k k2 mousetrack off
+
 mousetrack off
