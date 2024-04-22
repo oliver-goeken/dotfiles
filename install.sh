@@ -73,7 +73,7 @@ then
 fi
 
 ZSH_START_FILE=/etc/zsh/zshenv
-if [[ $"OSTYPE" == "darwin"* ]]; then
+if [[ "$OSTYPE" == "darwin"* ]]; then
 	ZSH_START_FILE=/etc/zshenv
 fi
 
