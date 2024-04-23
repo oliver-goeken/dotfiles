@@ -59,6 +59,7 @@ print_if_verbose () {
 
 # finding script directory regardless of running location, courtesy of @tekumara comment under --> https://stackoverflow.com/a/246128
 DOTFILEDIR=$(dirname "$(readlink -f "${BASH_SOURCE[0]}")")
+echo "$DOTFILEDIR" > ~/.dotfiledir
 for filename in `ls $DOTFILEDIR/config`
 do
 	if [ -e ~/.$filename  ]
@@ -118,5 +119,6 @@ if ! [[ "$OSTYPE" == "darwin"* ]]; then
 	fi
 fi
 
+exec zsh
 
 print_not_silent "done!"
