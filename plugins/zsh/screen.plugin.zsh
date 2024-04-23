@@ -22,15 +22,10 @@ if [[ "$TERM" == screen* ]]; then
   TAB_HARDSTATUS_PREFIX='"[`'$_GET_PATH'`] "'
   # when at the shell prompt, use the shell name (truncated to remove the path to
   # the shell) as the rest of the title
-  TAB_HARDSTATUS_PROMPT='$SHELL:t'
+  #TAB_HARDSTATUS_PROMPT='$SHELL:t'
   # when running a command, show the command name and arguments as the rest of
   # the title
   TAB_HARDSTATUS_EXEC='$cmd[1]:t'
-
-  function exec_show()
-  {
-
-  }
 
   # tell GNU screen what the tab window title ($1) and the hardstatus($2) should be
   function screen_set()
@@ -45,15 +40,15 @@ if [[ "$TERM" == screen* ]]; then
   function preexec()
   {
     local -a cmd; cmd=(${(z)1}) # the command string
-    eval "tab_title=$TAB_TITLE_PREFIX:$TAB_TITLE_EXEC"
-    eval "tab_hardstatus=$TAB_HARDSTATUS_PREFIX:$TAB_HARDSTATUS_EXEC"
+	eval "tab_title=$TAB_TITLE_PREFIX${cmd[1]:+:}$TAB_TITLE_EXEC"
+    eval "tab_hardstatus=$TAB_HARDSTATUS_PREFIX${cmd[1]:+:}$TAB_HARDSTATUS_EXEC"
     screen_set $tab_title $tab_hardstatus
   }
   # called by zsh before showing the prompt
   function precmd()
   {
-    eval "tab_title=$TAB_TITLE_PREFIX:$TAB_TITLE_EXEC"
-    eval "tab_hardstatus=$TAB_HARDSTATUS_PREFIX:$TAB_HARDSTATUS_EXEC"
+	eval "tab_title=$TAB_TITLE_PREFIX${cmd[1]:+:}$TAB_TITLE_EXEC"
+    eval "tab_hardstatus=$TAB_HARDSTATUS_PREFIX${cmd[1]:+:}$TAB_HARDSTATUS_EXEC"
     screen_set $tab_title $tab_hardstatus
   }
 fi
