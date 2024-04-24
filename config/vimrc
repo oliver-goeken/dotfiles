@@ -84,11 +84,12 @@ let mapleader = " "
 nnoremap <Space> <Nop>
 
 nnoremap <Leader>n :NERDTreeToggle<CR>
-nnoremap <C-p> :YcmCompleter GoTo<CR>
-nnoremap <C-u> :YcmCompleter GoToAlternateFile<CR>
-nnoremap <C-i> :tabn<CR>
+nnoremap <Leader>p :YcmCompleter GoTo<CR>
+nnoremap <Leader>u :YcmCompleter GoToAlternateFile<CR>
+nnoremap <Leader>i :tabn<CR>
 nnoremap <Leader>t :below terminal ++rows=7<CR>
 nnoremap <Leader>b <Esc>:call ToggleBraceComplete()<CR>i
+nmap <Leader>o <C-o>
 
 nnoremap <Leader>c :set cursorline!<CR>
 nmap <Leader>e <C-e>ee
