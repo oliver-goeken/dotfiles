@@ -51,7 +51,6 @@ function cdl {
 }
 
 # Plugins
-autoload -U colors && colors
 DOTFILEDIR="$(< ~/.dotfiledir)"
 
 for file in $DOTFILEDIR/plugins/zsh/*(.); do

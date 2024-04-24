@@ -38,6 +38,8 @@ set title
 
 set shell=zsh
 
+set hidden
+
 
 " AUTOCOMMANDS"
 "augroup MyYCMCustom
@@ -84,21 +86,27 @@ let mapleader = " "
 nnoremap <Space> <Nop>
 
 nnoremap <Leader>n :NERDTreeToggle<CR>
+nnoremap <Leader>m :NERDTreeFocus<CR>
 nnoremap <Leader>p :YcmCompleter GoTo<CR>
 nnoremap <Leader>u :YcmCompleter GoToAlternateFile<CR>
 nnoremap <Leader>i :tabn<CR>
-nnoremap <Leader>t :below terminal ++rows=7<CR>
-nnoremap <Leader>b <Esc>:call ToggleBraceComplete()<CR>i
+nnoremap <Leader>x :below terminal ++rows=7<CR>
 nmap <Leader>o <C-o>
 
 nnoremap <Leader>c :set cursorline!<CR>
 nmap <Leader>e <C-e>ee
-nmap <Leader>w <C-w>
 nmap <Leader>d <plug>(YCMHover)
 
 inoremap fj <Esc>l
 inoremap jf <Esc>l
 inoremap /* /*   */<Esc>hhhi
+
+nmap <leader>h <Plug>vem_move_buffer_left-
+nmap <leader>l <Plug>vem_move_buffer_right-
+nmap <tab> <Plug>vem_next_buffer-
+nmap <S-tab> <Plug>vem_prev_buffer-
+nmap <leader>w <Plug>vem_delete_buffer-
+nnoremap <leader>t :enew<CR>:NERDTreeFocus<CR>
 
 
 " PLUGINS "
@@ -119,6 +127,7 @@ Plug 'simeji/winresizer'
 Plug 'drzel/vim-scrolloff-fraction'
 Plug 'tpope/vim-surround'
 Plug 'jiangmiao/auto-pairs'
+Plug 'pacha/vem-tabline'
 call plug#end()
 
 let MY_YCM_HIGHLIGHT_GROUP = {
@@ -136,6 +145,10 @@ let g:ycm_autoclose_preview_window_after_completion = 1
 let g:ycm_enable_semantic_highlighting=1
 let g:scrolloff_fraction = 0.30
 let g:vimwiki_list = [{'path': '~/.vim/wiki'}]
+
+let g:vem_tabline_show = 2
+let g:vem_tabline_multiwindow_mode = 1
+
 highlight vimwikiHeader1 ctermfg=1
 highlight vimwikiHeader2 ctermfg=2
 highlight vimwikiHeader3 ctermfg=3

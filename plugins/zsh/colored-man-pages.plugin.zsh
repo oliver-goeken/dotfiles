@@ -10,6 +10,7 @@
 # us       start underline
 # ue       stop underline
 
+autoload -U colors && colors
 function man() {
 	env \
 		LESS_TERMCAP_md=$(tput bold; tput setaf 4) \
