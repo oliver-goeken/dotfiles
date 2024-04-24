@@ -49,6 +49,8 @@ set hidden
 "    \ 'syntax': &filetype
 "    \ }
 "augroupEND
+autocmd BufEnter * silent! lcd %:p:h
+autocmd TerminalWinOpen * set nobuflisted
 
 
 " CONDITIONAL RELATIVE LINE NUMBER "
@@ -78,7 +80,7 @@ hi LineNrBelow ctermfg=179
 autocmd BufReadPost *
      \ if line("'\"") > 0 && line("'\"") <= line("$") |
      \   exe "normal! g`\"" |
-"	 \ endif
+	 \ endif
 
 
 " SHORTCUTS "
@@ -90,7 +92,6 @@ nnoremap <Leader>m :NERDTreeFocus<CR>
 nnoremap <Leader>p :YcmCompleter GoTo<CR>
 nnoremap <Leader>u :YcmCompleter GoToAlternateFile<CR>
 nnoremap <Leader>i :tabn<CR>
-nnoremap <Leader>x :below terminal ++rows=7<CR>
 nmap <Leader>o <C-o>
 
 nnoremap <Leader>c :set cursorline!<CR>
@@ -106,7 +107,12 @@ nmap <leader>l <Plug>vem_move_buffer_right-
 nmap <tab> <Plug>vem_next_buffer-
 nmap <S-tab> <Plug>vem_prev_buffer-
 nmap <leader>w <Plug>vem_delete_buffer-
-nnoremap <leader>t :enew<CR>:NERDTreeFocus<CR>
+nnoremap <leader>t :enew<CR>
+
+nnoremap <Leader>x :below terminal ++rows=7<CR>
+nnoremap <Leader><tab> <C-w>j
+tnoremap <Leader><tab> <C-w>w
+tnoremap <Leader><s-tab> <C-w>W
 
 
 " PLUGINS "
@@ -128,7 +134,15 @@ Plug 'drzel/vim-scrolloff-fraction'
 Plug 'tpope/vim-surround'
 Plug 'jiangmiao/auto-pairs'
 Plug 'pacha/vem-tabline'
+Plug 'mhinz/vim-startify', {'branch': 'center'}
 call plug#end()
+
+let dotfiledir = readfile(glob("~/.dotfiledir"), '', 1)[0] 
+let plugin_loc = dotfiledir . '/plugins/vim/*.vim'
+for f in split(glob(plugin_loc), '\n')
+	exe 'source' f
+endfor
+
 
 let MY_YCM_HIGHLIGHT_GROUP = {
 	\ 'parameter': 'WarningMsg',
@@ -148,6 +162,10 @@ let g:vimwiki_list = [{'path': '~/.vim/wiki'}]
 
 let g:vem_tabline_show = 2
 let g:vem_tabline_multiwindow_mode = 1
+
+let g:NERDTreeChDirMode = 2
+
+let g:startify_center = 60
 
 highlight vimwikiHeader1 ctermfg=1
 highlight vimwikiHeader2 ctermfg=2
