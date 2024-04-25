@@ -6,7 +6,17 @@ altscreen on
 hardstatus alwayslastline
 hardstatus string '%{= kw}%?  %-w%?%{+b yk}  %n*%t  %{-}%+w%=%{y}[%{-}%m/%d %C%A%{y}]' 
 
+# weird fix for a mouse select problem im having.
+# it seems like after my btop blankerprg comes on
+# using the mouse to select or click just puts a combo
+# of numbers on the screen, this fixes that.
 bindkey -k k1 mousetrack on
 bindkey -k k2 mousetrack off
 
 mousetrack off
+
+# Window numbering starts at 1, not 0. --> https://wiki.archlinux.org/title/GNU_Screen#Start_at_window_1
+bind c screen 1
+bind ^c screen 1
+bind 0 select 10                                                            
+screen 1
