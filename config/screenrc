@@ -1,5 +1,5 @@
 blankerprg pipes.sh
-idle 600 blanker
+idle 400 blanker
 
 altscreen on
 
