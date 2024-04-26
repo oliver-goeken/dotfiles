@@ -1,4 +1,4 @@
-blankerprg btop
+blankerprg pipes.sh
 idle 600 blanker
 
 altscreen on

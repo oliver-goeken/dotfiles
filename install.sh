@@ -3,12 +3,14 @@
 # option handling from --> https://stackoverflow.com/a/14203146
 VERBOSE=0
 SILENT=0
+ALL=0
 usage_message () {
 	echo "usage: install.sh [options]"
 	echo "  options:"
 	echo "    -h, --help     Display this help message"
 	echo "    -v, --verbose  Print all messages"
 	echo "    -s, --silent   Suppresse all messages"
+	echo "    -a, --all      Install everything, including extra programs"
 }
 while [[ $# -gt 0 ]]; do
 	case $1 in
@@ -22,6 +24,10 @@ while [[ $# -gt 0 ]]; do
 			;;
 		-s|--silent)
 			SILENT=1
+			shift
+			;;
+		-a|--all)
+			ALL=1
 			shift
 			;;
 		-*|--*)
@@ -99,7 +105,7 @@ then
 	print_not_silent "cloning zsh-syntax-highlighting..."
 	cd $DOTFILEDIR/plugins/zsh
 	git clone https://github.com/zsh-users/zsh-syntax-highlighting.git > /tmp/dotfile_clone
-	print_not_silent /tmp/dotfile_clone >> ~/.dotfiles.log
+	echo /tmp/dotfile_clone >> ~/.dotfiles.log
 	print_if_verbose $(echo /tmp/dotfile_clone)
 fi
 
@@ -118,6 +124,20 @@ if ! [[ "$OSTYPE" == "darwin"* ]]; then
 		print_not_silent 'eval "$(dircolors ~/.dir_colors)"' | sudo tee -a $ZSH_START_FILE > /dev/null
 	fi
 fi
+
+if [ $ALL = 1 ]; then
+	print_not_silent "installing pipes.sh..."
+	mkdir -p ~/git
+	cd ~/git
+	git clone git@github.com:pipeseroni/pipes.sh.git > /tmp/dotfile_pipes
+	echo /tmp/dotfile_pipes >> ~/.dotfiles.log
+	print_if_verbose $(echo /tmp/dotfile_pipes)
+	cd pipes.sh
+	sudo make install > /tmp/dotfile_pipes_make
+	echo /tmp/dotfile_pipes_make >> ~/.dotfiles.log
+	print_if_verbose $(echo /tmp/dotfile_pipes_make)
+fi
+
 
 exec zsh
 
