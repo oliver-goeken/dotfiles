@@ -120,6 +120,8 @@ nmap <S-tab> <Plug>vem_prev_buffer-
 nmap <leader>w <Plug>vem_delete_buffer-
 nnoremap <leader>t :enew<CR>
 
+nnoremap <C-s> :w<CR>
+
 nnoremap <Leader>x :below terminal ++rows=7<CR>
 nnoremap <Leader><tab> <C-w>j
 tnoremap <Leader><tab> <C-w>w
