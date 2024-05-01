@@ -20,7 +20,7 @@ primary.background = '0x453652'
 
 [cursor]
 style.blinking = "On"
-blink_interval = 1000
+blink_interval = 900
 blink_timeout = 15
 unfocused_hollow = false
 
