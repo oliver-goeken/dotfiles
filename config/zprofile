@@ -1,1 +1,7 @@
-screen -Rq
+case `uname` in 
+    Darwin)
+    ;;
+    Linux)
+		screen -Rq
+    ;;
+esac
