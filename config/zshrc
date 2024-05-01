@@ -55,7 +55,7 @@ function cdl {
 # Plugins
 DOTFILEDIR="$(< ~/.dotfiledir)"
 
-for file in $DOTFILEDIR/dotfiles/plugins/zsh/*(.); do
+for file in $DOTFILEDIR/plugins/zsh/*(.); do
 	source "$file"
 done
 

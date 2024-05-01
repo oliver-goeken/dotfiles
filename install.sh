@@ -62,14 +62,13 @@ print_if_verbose () {
 	fi
 }
 
-cd $DOTFILEDIR/dotfiles
-ls
-git pull origin main
-cd -
-
 
 # finding script directory regardless of running location, courtesy of @tekumara comment under --> https://stackoverflow.com/a/246128
 DOTFILEDIR=$(dirname "$(readlink -f "${BASH_SOURCE[0]}")")
+cd $DOTFILEDIR
+ls
+git pull origin main
+cd -
 echo "$DOTFILEDIR" > ~/.dotfiledir
 for filename in `ls $DOTFILEDIR/config`
 do
