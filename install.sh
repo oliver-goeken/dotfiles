@@ -62,8 +62,10 @@ print_if_verbose () {
 	fi
 }
 
-cd $DOTFILEDIR
-git pull
+cd $DOTFILEDIR/dotfiles
+ls
+git pull origin main
+cd -
 
 
 # finding script directory regardless of running location, courtesy of @tekumara comment under --> https://stackoverflow.com/a/246128
