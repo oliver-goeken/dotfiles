@@ -1,0 +1,28 @@
+[window]
+dynamic_padding = true
+decorations = "Full"
+blur = true
+startup_mode = "Maximized"
+opacity = 0.92
+resize_increments = true
+
+[font]
+normal.family = "SF Mono"
+normal.style = "Regular"
+bold.family = "SF Mono"
+bold.style = "Semibold"
+italic.family = "SF Mono"
+italic.style = "Light Italic"
+size = 14
+
+[colors]
+primary.background = '0x453652'
+
+[cursor]
+style.blinking = "On"
+blink_interval = 1000
+blink_timeout = 15
+unfocused_hollow = false
+
+[mouse]
+hide_when_typing = true
