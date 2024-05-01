@@ -62,6 +62,9 @@ print_if_verbose () {
 	fi
 }
 
+cd $DOTFILEDIR
+git pull
+
 
 # finding script directory regardless of running location, courtesy of @tekumara comment under --> https://stackoverflow.com/a/246128
 DOTFILEDIR=$(dirname "$(readlink -f "${BASH_SOURCE[0]}")")
