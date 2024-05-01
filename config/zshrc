@@ -59,5 +59,8 @@ for file in $DOTFILEDIR/plugins/zsh/*(.); do
 	source "$file"
 done
 
+ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=5'
+
+
 neofetch
 source $DOTFILEDIR/plugins/zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh

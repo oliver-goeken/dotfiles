@@ -5,6 +5,7 @@ blur = true
 startup_mode = "Maximized"
 opacity = 0.92
 resize_increments = true
+option_as_alt = true
 
 [font]
 normal.family = "SF Mono"

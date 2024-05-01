@@ -1,4 +1,4 @@
-blankerprg pipes.sh
+blankerprg pipes.sh -R -r 5000 -t 3
 idle 400 blanker
 
 altscreen on
