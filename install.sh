@@ -66,24 +66,18 @@ declare -A locations=( ["sway"]="~/.config/sway" )
 
 # finding script directory regardless of running location, courtesy of @tekumara comment under --> https://stackoverflow.com/a/246128
 DOTFILEDIR=$(dirname "$(readlink -f "${BASH_SOURCE[0]}")")
-cd $DOTFILEDIR
-ls
-git pull origin main
-cd -
 echo "$DOTFILEDIR" > ~/.dotfiledir
 for filename in `ls $DOTFILEDIR/config`
 do
 	if ! [ -d $DOTFILEDIR/config/$filename ]
 	then
 		CONFDEST="\<$filename\>"
-		if ! [[ ${locations[@]} =~ $CONFLOC ]]
+		if [[ -z ${locations[$filename]} ]]
 		then
-			CONFDEST="~/.$FILENAME"
+			CONFDEST=~/."$filename"
 		else
 			CONFDEST="${!locations[$filename]}"
 		fi
-		echo $filename
-		echo $CONFDEST
 		if [ -e $CONFDEST  ]
 		then
 			if [ -L $CONFDEST ]
@@ -134,7 +128,8 @@ then
 	vi
 fi
 
-if ! [[ "$OSTYPE" == "darwin"* ]]; then
+INSTALL_LS=false
+if [ "$INSTALL_LS" = true ] && ! [[ "$OSTYPE" == "darwin"* ]]; then
 	ZSH_START_FILE=/etc/zsh/zshenv
 	if ! grep -F -x -q 'eval "$(dircolors ~/.dir_colors)"' $ZSH_START_FILE > /dev/null
 	then
@@ -144,7 +139,7 @@ if ! [[ "$OSTYPE" == "darwin"* ]]; then
 	fi
 fi
 
-if [ $ALL = 1 ]; then
+if [ $ALL = 1 ] && ! [ -d ~/git/pipes.sh ]; then
 	print_not_silent "installing pipes.sh..."
 	mkdir -p ~/git
 	cd ~/git
