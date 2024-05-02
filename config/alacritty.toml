@@ -13,7 +13,7 @@ normal.style = "Regular"
 bold.family = "SF Mono"
 bold.style = "Semibold"
 italic.family = "SF Mono"
-italic.style = "Light Italic"
+italic.style = "Regular Italic"
 size = 14
 
 [colors]
@@ -27,3 +27,6 @@ unfocused_hollow = false
 
 [mouse]
 hide_when_typing = true
+
+[shell]
+program = "/bin/zsh"
