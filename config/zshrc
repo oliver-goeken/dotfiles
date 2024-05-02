@@ -19,20 +19,6 @@ export LESS="--RAW-CONTROL-CHARS"
 source ~/.LESS_TERMCAP
 
 
-# OS-based stuff
-case `uname` in 
-    Darwin)
-        alias python3=/opt/homebrew/bin/python3
-        alias python=/opt/homebrew/bin/python3
-		eval $(/opt/homebrew/bin/brew shellenv)
-        export PATH=$(brew --prefix)/bin:$(brew --prefix)/sbin:$PATH
-    ;;
-    Linux)
-		alias bat="batcat"
-    ;;
-esac
-
-
 # Aliases
 alias rm='rm -i'
 alias gdb='gdb -silent'
@@ -62,5 +48,20 @@ done
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=5'
 
 
-neofetch
+# OS-based stuff
+case `uname` in 
+    Darwin)
+        alias python3=/opt/homebrew/bin/python3
+        alias python=/opt/homebrew/bin/python3
+		eval $(/opt/homebrew/bin/brew shellenv)
+        export PATH=$(brew --prefix)/bin:$(brew --prefix)/sbin:$PATH
+    ;;
+    Linux)
+		alias bat="batcat"
+    ;;
+esac
+
+# Other
+export SHELL=/bin/zsh
+[[ $TERM != "screen" ]] && exec screen -q
 source $DOTFILEDIR/plugins/zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
