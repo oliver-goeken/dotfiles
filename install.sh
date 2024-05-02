@@ -45,7 +45,7 @@ done
 
 
 create_symlink () {
-	sudo ln -s $DOTFILEDIR/config/$1 ~/.$1
+	sudo ln -s $DOTFILEDIR/config/$1 $2
 }
 
 print_not_silent () {
@@ -62,6 +62,7 @@ print_if_verbose () {
 	fi
 }
 
+declare -A locations=( ["sway"]="~/.config/sway" )
 
 # finding script directory regardless of running location, courtesy of @tekumara comment under --> https://stackoverflow.com/a/246128
 DOTFILEDIR=$(dirname "$(readlink -f "${BASH_SOURCE[0]}")")
@@ -72,36 +73,50 @@ cd -
 echo "$DOTFILEDIR" > ~/.dotfiledir
 for filename in `ls $DOTFILEDIR/config`
 do
-	if [ -e ~/.$filename  ]
+	if ! [ -d $DOTFILEDIR/config/$filename ]
 	then
-		if [ -L ~/.$filename ]
+		CONFDEST="\<$filename\>"
+		if ! [[ ${locations[@]} =~ $CONFLOC ]]
 		then
-			if ! [ "$(readlink -f ~/.$filename)" = "$(readlink -f $DOTFILEDIR/config/$filename)" ]
+			CONFDEST="~/.$FILENAME"
+		else
+			CONFDEST="${!locations[$filename]}"
+		fi
+		echo $filename
+		echo $CONFDEST
+		if [ -e $CONFDEST  ]
+		then
+			if [ -L $CONFDEST ]
 			then
-				print_not_silent "incorrect $filename symlink found, updating..."
-				unlink ~/.$filename
-				create_symlink $filename
+				if ! [ "$(readlink -f $CONFDEST)" = "$(readlink -f $DOTFILEDIR/config/$filename)" ]
+				then
+					print_not_silent "incorrect $filename symlink found, updating..."
+					unlink $CONFDEST
+					create_symlink $filename $CONFDEST
+				else
+					print_if_verbose "$filename symlink already exists!"
+				fi
 			else
-				print_if_verbose "$filename symlink already exists!"
+				print_not_silent "unlinked $filename found, creating backup at \"$CONFDEST.old\"..."
+				mv $CONFDEST $CONFDEST.old
+				print_not_silent "creating new symlink..."
+				create_symlink $filename $CONFDEST
 			fi
 		else
-			print_not_silent "unlinked $filename found, creating backup at \"~/.$filename.old\"..."
-			mv ~/.$filename ~/.$filename.old
-			print_not_silent "creating new symlink..."
-			create_symlink $filename
-		fi
-	else
-		if [ -L ~/.$filename ]
-		then 
-			print_not_silent "incorrect $filename symlink found, updating..."
-			unlink ~/.$filename
-			create_symlink $filename
-		else
-			print_not_silent "$filename not found, creating symlink..."
-			create_symlink $filename
+			if [ -L $CONFDEST ]
+			then 
+				print_not_silent "incorrect $filename symlink found, updating..."
+				unlink $CONFDEST
+				create_symlink $filename $CONFDEST
+			else
+				print_not_silent "$filename not found, creating symlink..."
+				create_symlink $filename $CONFDEST
+			fi
 		fi
 	fi
 done
+
+
 
 
 if ! [ -d $DOTFILEDIR/plugins/zsh/zsh-syntax-highlighting ] || [ -z "$(ls -A $DOTFILEDIR/plugins/zsh/zsh-syntax-highlighting)" ]
@@ -140,6 +155,7 @@ if [ $ALL = 1 ]; then
 	sudo make install > /tmp/dotfile_pipes_make
 	echo /tmp/dotfile_pipes_make >> ~/.dotfiles.log
 	print_if_verbose $(echo /tmp/dotfile_pipes_make)
+	cd $DOTFILEDIR
 fi
 
 
