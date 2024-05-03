@@ -1,8 +1,11 @@
 # Custom Prompt
 autoload -Uz vcs_info
-precmd() { vcs_info }
+precmd() { 
+	vcs_info
+}
+zstyle ':vcs_info:*' enable git
 zstyle ':vcs_info:git:*' formats '[%b] '
-setopt PROMPT_SUBST
+setopt prompt_subst
 PROMPT='%F{cyan}[%D{%I:%M%p}]%f %F{magenta}%n%f %F{red}${vcs_info_msg_0_}%f%F{blue}%~%f %F{blue}%(!.#.$)%f '
 
 
@@ -63,5 +66,5 @@ esac
 
 # Other
 export SHELL=/bin/zsh
-[[ $TERM != "screen" ]] && exec screen -q
+[[ $TERM != "screen" ]] && exec screen -q -RR
 source $DOTFILEDIR/plugins/zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
