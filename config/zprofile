@@ -1,7 +1,0 @@
-case `uname` in 
-    Darwin)
-    ;;
-    Linux)
-		screen -Rq
-    ;;
-esac

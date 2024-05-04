@@ -1,11 +1,11 @@
 # Custom Prompt
 autoload -Uz vcs_info
-precmd() { 
+precmd() {
 	vcs_info
 }
-zstyle ':vcs_info:*' enable git
+
 zstyle ':vcs_info:git:*' formats '[%b] '
-setopt prompt_subst
+setopt PROMPT_SUBST
 PROMPT='%F{cyan}[%D{%I:%M%p}]%f %F{magenta}%n%f %F{red}${vcs_info_msg_0_}%f%F{blue}%~%f %F{blue}%(!.#.$)%f '
 
 
@@ -20,6 +20,20 @@ setopt appendhistory
 export CLICOLOR=1
 export LESS="--RAW-CONTROL-CHARS"
 source ~/.LESS_TERMCAP
+
+
+# OS-based stuff
+case `uname` in 
+    Darwin)
+        alias python3=/opt/homebrew/bin/python3
+        alias python=/opt/homebrew/bin/python3
+		eval $(/opt/homebrew/bin/brew shellenv)
+        export PATH=$(brew --prefix)/bin:$(brew --prefix)/sbin:$PATH
+    ;;
+    Linux)
+		alias bat="batcat"
+    ;;
+esac
 
 
 # Aliases
@@ -50,21 +64,7 @@ done
 
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=5'
 
-
-# OS-based stuff
-case `uname` in 
-    Darwin)
-        alias python3=/opt/homebrew/bin/python3
-        alias python=/opt/homebrew/bin/python3
-		eval $(/opt/homebrew/bin/brew shellenv)
-        export PATH=$(brew --prefix)/bin:$(brew --prefix)/sbin:$PATH
-    ;;
-    Linux)
-		alias bat="batcat"
-    ;;
-esac
-
 # Other
 export SHELL=/bin/zsh
-[[ $TERM != "screen" ]] && exec screen -q -RR
+#[[ $TERM != "screen" ]] && exec screen -q -RR
 source $DOTFILEDIR/plugins/zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
