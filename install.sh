@@ -129,7 +129,7 @@ then
 fi
 
 INSTALL_LS=false
-if [ "$INSTALL_LS" = true ] && ! [[ "$OSTYPE" == "darwin"* ]]; then
+if [ "$INSTALL_LS" = "true" ] && ! [[ "$OSTYPE" == "darwin"* ]]; then
 	ZSH_START_FILE=/etc/zsh/zshenv
 	if ! grep -F -x -q 'eval "$(dircolors ~/.dir_colors)"' $ZSH_START_FILE > /dev/null
 	then
@@ -138,6 +138,8 @@ if [ "$INSTALL_LS" = true ] && ! [[ "$OSTYPE" == "darwin"* ]]; then
 		print_not_silent 'eval "$(dircolors ~/.dir_colors)"' | sudo tee -a $ZSH_START_FILE > /dev/null
 	fi
 fi
+
+
 
 if [ $ALL = 1 ] && ! [ -d ~/git/pipes.sh ]; then
 	print_not_silent "installing pipes.sh..."
@@ -151,6 +153,14 @@ if [ $ALL = 1 ] && ! [ -d ~/git/pipes.sh ]; then
 	echo /tmp/dotfile_pipes_make >> ~/.dotfiles.log
 	print_if_verbose $(echo /tmp/dotfile_pipes_make)
 	cd $DOTFILEDIR
+fi
+
+if [ $ALL = 1 ] && ! [ -d ~/.tmux/plugins/tpm ]; then
+	print_not_silent "installing tpm..."
+	mkdir -p ~/.tmux/plugins/tpm
+	git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm > /tmp/dotfile_tpm
+	echo /tmp/dotfile_pipes >> ~/.dotfiles.log
+	print_if_verbose $(echo /tmp/dotfile_pipes)
 fi
 
 

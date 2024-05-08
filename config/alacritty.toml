@@ -1,9 +1,9 @@
 [window]
-dynamic_padding = true
+dynamic_padding = false
 decorations = "Full"
 blur = true
 startup_mode = "Maximized"
-opacity = 0.92
+opacity = 0.97
 resize_increments = true
 option_as_alt = "Both"
 
@@ -29,7 +29,7 @@ unfocused_hollow = false
 hide_when_typing = true
 
 [shell]
-program = "/bin/zsh"
+program = "/usr/local/bin/tmux"
 
 [keyboard]
 bindings = [

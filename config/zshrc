@@ -11,9 +11,11 @@ PROMPT='%F{cyan}[%D{%I:%M%p}]%f %F{magenta}%n%f %F{red}${vcs_info_msg_0_}%f%F{bl
 
 # History
 HISTFILE=~/.zsh_history
-HISTSIZE=10000
-SAVEHIST=10000
+HISTSIZE=500000
+SAVEHIST=500000
 setopt appendhistory
+setopt INC_APPEND_HISTORY  
+setopt SHARE_HISTORY
 
 
 # Colors
@@ -48,6 +50,12 @@ alias ll='ls -AlF'
 alias la='ls -A'
 alias l='ls -CF'
 
+# https://www.reddit.com/r/dotfiles/comments/13nnmia/when_youre_too_used_to_vim/
+alias :q='exit'
+alias :w="echo 'not in vim :)'"
+
+alias whitenoise='mpv --no-video ~/Videos/white_noise.mp4'
+
 alias cls='clear;ls'
 
 function cdl {
@@ -66,5 +74,5 @@ ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=5'
 
 # Other
 export SHELL=/bin/zsh
-#[[ $TERM != "screen" ]] && exec screen -q -RR
+fastfetch -c paleofetch
 source $DOTFILEDIR/plugins/zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
