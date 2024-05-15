@@ -3,7 +3,7 @@ dynamic_padding = false
 decorations = "Full"
 blur = true
 startup_mode = "Maximized"
-opacity = 0.97
+opacity = 1
 resize_increments = true
 option_as_alt = "Both"
 
@@ -16,8 +16,36 @@ italic.family = "SF Mono"
 italic.style = "Regular Italic"
 size = 12
 
-[colors]
-primary.background = '0x453652'
+# COLORS --> https://github.com/alacritty/alacritty-theme/blob/master/themes/argonaut.toml
+# Default colors
+[colors.primary]
+background = '0x453652'
+#background = '#292C3E'
+foreground = '#EBEBEB'
+# Cursor colors
+#[colors.cursor]
+#text = '#EBEBEB'
+#cursor = '#FF261E'
+# Normal colors
+[colors.normal]
+black   = '#0d0d0d'
+red     = '#FF301B'
+green   = '#A0E521'
+yellow  = '#FFC620'
+blue    = '#1BA6FA'
+magenta = '#8763B8'
+cyan    = '#21DEEF'
+white   = '#EBEBEB'
+# Bright colors
+[colors.bright]
+black   = '#6D7070'
+red     = '#f53343'
+green   = '#B8E466'
+yellow  = '#FFD750'
+blue    = '#1BA6FA'
+magenta = '#A578EA'
+cyan    = '#73FBF1'
+white   = '#FEFEF8'
 
 [cursor]
 style.blinking = "On"
@@ -30,6 +58,7 @@ hide_when_typing = true
 
 [shell]
 program = "/usr/local/bin/tmux"
+args = ["new", "-As0"]
 
 [keyboard]
 bindings = [
