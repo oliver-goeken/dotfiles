@@ -50,6 +50,8 @@ alias ll='ls -AlF'
 alias la='ls -A'
 alias l='ls -CF'
 
+alias diff="diff -s"
+
 # https://www.reddit.com/r/dotfiles/comments/13nnmia/when_youre_too_used_to_vim/
 alias :q='exit'
 alias :w="echo 'not in vim :)'"
@@ -71,6 +73,9 @@ for file in $DOTFILEDIR/plugins/zsh/*(.); do
 done
 
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=5'
+
+#tmux stuff
+export PATH="$DOTFILEDIR/bin:$PATH"
 
 # Other
 export SHELL=/bin/zsh

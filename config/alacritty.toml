@@ -30,7 +30,7 @@ foreground = '#EBEBEB'
 [colors.normal]
 black   = '#0d0d0d'
 red     = '#FF301B'
-green   = '#A0E521'
+green   = '#80cf21'
 yellow  = '#FFC620'
 blue    = '#1BA6FA'
 magenta = '#8763B8'
@@ -40,7 +40,7 @@ white   = '#EBEBEB'
 [colors.bright]
 black   = '#6D7070'
 red     = '#f53343'
-green   = '#B8E466'
+green   = '#6ec418'
 yellow  = '#FFD750'
 blue    = '#1BA6FA'
 magenta = '#A578EA'
@@ -57,8 +57,8 @@ unfocused_hollow = false
 hide_when_typing = true
 
 [shell]
-program = "/usr/local/bin/tmux"
-args = ["new", "-As0"]
+program = "/bin/zsh"
+args = ["-l", "-c", "~/dotfiles/bin/TMUX_SHELL_START"]
 
 [keyboard]
 bindings = [

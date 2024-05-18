@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+ATTACH_OPT=$(tmux ls | grep -v attached | head -n 1 | head -c 1)
+tmux attach-session -t $ATTACH_OPT || tmux
