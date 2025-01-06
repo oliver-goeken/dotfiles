@@ -14,7 +14,7 @@ bold.family = "SF Mono"
 bold.style = "Semibold"
 italic.family = "SF Mono"
 italic.style = "Regular Italic"
-size = 12
+size = 14
 
 # COLORS --> https://github.com/alacritty/alacritty-theme/blob/master/themes/argonaut.toml
 # Default colors
@@ -58,7 +58,7 @@ hide_when_typing = true
 
 [shell]
 program = "/bin/zsh"
-args = ["-l", "-c", "~/dotfiles/bin/TMUX_SHELL_START"]
+args = ["-i", "-c", "~/dotfiles/bin/TMUX_SHELL_START"]
 
 [keyboard]
 bindings = [

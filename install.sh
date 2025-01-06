@@ -62,7 +62,7 @@ print_if_verbose () {
 	fi
 }
 
-declare -A locations=( ["sway"]="~/.config/sway" )
+declare -a locations=( ["sway"]="~/.config/sway" )
 
 # finding script directory regardless of running location, courtesy of @tekumara comment under --> https://stackoverflow.com/a/246128
 DOTFILEDIR=$(dirname "$(readlink -f "${BASH_SOURCE[0]}")")
